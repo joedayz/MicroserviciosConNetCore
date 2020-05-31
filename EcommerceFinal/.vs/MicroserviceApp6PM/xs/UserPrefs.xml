@@ -1,0 +1,25 @@
+﻿<Properties StartupConfiguration="{E9A52A91-9B9A-4D33-BBEC-E3B1E99B7326}|Default">
+  <MonoDevelop.Ide.ItemProperties.AuthenticationMicroservice PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="APIGateway/ocelot.json">
+    <Files>
+      <File FileName="APIGateway/ocelot.json" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MicroserviceApp6PM" expanded="True">
+            <Node name="APIGateway" expanded="True">
+              <Node name="ocelot.json" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
