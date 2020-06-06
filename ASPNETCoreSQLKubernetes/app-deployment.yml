@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: aspnet-pod
+  labels:
+    name: aspnet
+spec:
+  containers:
+    - name: aspnet-container
+      image: aspnetapp:v1
+      resources:
+      env:
+        - name: DB_CONNECTION
+          value: "Server=mssql-service,1433; initial catalog=mydb;persist security info=True;user id=sa;password=YourStrong@Passw0rd"
+      ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aspnet-service
+spec:
+  selector:
+    name: aspnet
+  ports:
+    - port: 80
+      nodePort: 30080
+  type: NodePort

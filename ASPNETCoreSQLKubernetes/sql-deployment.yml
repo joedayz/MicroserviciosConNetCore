@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mssql-pod
+  labels:
+    name: mssql
+spec:
+  containers:
+    - name: mssql-container
+      image: mcr.microsoft.com/mssql/server:2019-CU4-ubuntu-16.04
+      resources:
+      env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SA_PASSWORD
+          value: "YourStrong@Passw0rd"
+      ports:
+        - containerPort: 1433
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mssql-service
+spec:
+  selector:
+    name: mssql
+  ports:
+    - port: 1433
+      nodePort: 32433
+  type: NodePort

@@ -1,0 +1,91 @@
+version: '3.4'
+
+# Network
+networks:
+  microdocker_vnet:
+    driver: overlay 
+    ipam:
+      driver: default
+      config:
+        - subnet: "184.16.238.0/24"
+        - subnet: "2001:3984:3989::/64"
+
+# Microservices
+services:
+# Api Gateway
+  apigateway:
+    image: apigateway:v2
+    networks:
+      microdocker_vnet:
+        ipv4_address: 184.16.238.5
+        ipv6_address: 2001:3984:3989::5
+    ports:
+        - "6005:80"
+
+# Authentication Service 
+  authenticationdb:
+    image: "mcr.microsoft.com/mssql/server:2019-CU4-ubuntu-16.04"
+    environment:
+        SA_PASSWORD: "YourStrong@Passw0rd"
+        ACCEPT_EULA: "Y"
+    networks:
+      microdocker_vnet:
+        ipv4_address: 184.16.238.10
+        ipv6_address: 2001:3984:3989::10
+    ports:
+        - "6010:1433"
+
+  authenticationmicroservice:
+    image: authenticationmicroservice:v2
+    depends_on:
+      - "authenticationdb"
+    environment:
+      DB_CONNECTION: "Server=authenticationdb,1433; initial catalog=authentication_microservice;persist security info=True;user id=sa;password=YourStrong@Passw0rd"
+      WAIT_HOSTS: mssql:1433
+      WAIT_HOSTS_TIMEOUT: 300
+    networks:
+      microdocker_vnet:
+         ipv4_address: 184.16.238.11
+         ipv6_address: 2001:3984:3989::11
+    ports:
+        - "6011:80"
+
+# Catalog Service 
+  catalogdb:
+    image: "mcr.microsoft.com/mssql/server:2019-CU4-ubuntu-16.04"
+    environment:
+        SA_PASSWORD: "YourStrong@Passw0rd"
+        ACCEPT_EULA: "Y"
+    networks:
+      microdocker_vnet:
+         ipv4_address: 184.16.238.12
+         ipv6_address: 2001:3984:3989::12
+    ports:
+        - "6012:1433"
+
+  catalogmicroservice:
+    image: catalogmicroservice:v2
+    depends_on:
+      - "catalogdb"
+    environment:
+      DB_CONNECTION: "Server=catalogdb,1433; initial catalog=catalog_microservice;persist security info=True;user id=sa;password=YourStrong@Passw0rd"
+      WAIT_HOSTS: mssql:1433
+      WAIT_HOSTS_TIMEOUT: 300
+    networks:
+      microdocker_vnet:
+        ipv4_address: 184.16.238.13
+        ipv6_address: 2001:3984:3989::13
+    ports:
+        - "6013:80" 
+
+# UI Service 
+  uimicroservice:
+    image: uimicroservice:v2
+    environment:
+      API_ADDRESS: "184.16.238.5"
+    networks:
+      microdocker_vnet:
+        ipv4_address: 184.16.238.14
+        ipv6_address: 2001:3984:3989::14
+    ports:
+        - "6014:80"

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kdmvc
+spec:
+  selector:
+    matchLabels:
+      app: kdmvc-pod
+  template:
+    metadata:
+      labels:
+        app: kdmvc-pod
+    spec:
+      containers:
+      - name: kdmvc
+        image: kdmvcapp:v1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80

@@ -1,0 +1,55 @@
+{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/api/catalog/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalogmicroservice",
+          "Port": 80
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "AuthKey"
+      },
+      "RouteClaimsRequirement": {
+        "Roles": "User"
+      },
+      "key": "catalog",
+      "FileCacheOptions": {
+        "TtlSeconds": 60,
+        "Region": "catalogcached"
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/catalog",
+      "UpstreamHttpMethod": [ "Get", "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/authentication/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authenticationmicroservice",
+          "Port": 80
+        }
+      ],
+      "key": "user",
+      "UpstreamPathTemplate": "/authentication",
+      "UpstreamHttpMethod": [ "Post", "Get" ]
+    }
+  ],
+  "Aggregates": [
+    {
+      "ReRouteKeys": [
+        "user",
+        "catalog"
+      ],
+      "UpstreamPathTemplate": "/user-catalog"
+    }
+  ]
+}

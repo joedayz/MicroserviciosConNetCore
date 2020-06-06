@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASPNETCoreCRUD", "ASPNETCoreCRUD\ASPNETCoreCRUD.csproj", "{774D72B5-5B46-4BBC-B352-6D0DF880326D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{FC23BEFC-DD54-4928-9E2C-765C4AF044FB}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D8BA1F26-7595-4F25-8431-D581AA8AFDAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{774D72B5-5B46-4BBC-B352-6D0DF880326D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{774D72B5-5B46-4BBC-B352-6D0DF880326D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{774D72B5-5B46-4BBC-B352-6D0DF880326D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{774D72B5-5B46-4BBC-B352-6D0DF880326D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC23BEFC-DD54-4928-9E2C-765C4AF044FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC23BEFC-DD54-4928-9E2C-765C4AF044FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC23BEFC-DD54-4928-9E2C-765C4AF044FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC23BEFC-DD54-4928-9E2C-765C4AF044FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8BA1F26-7595-4F25-8431-D581AA8AFDAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8BA1F26-7595-4F25-8431-D581AA8AFDAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8BA1F26-7595-4F25-8431-D581AA8AFDAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8BA1F26-7595-4F25-8431-D581AA8AFDAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {046F23BF-E70E-45F2-9F26-27ACCAFFBAE5}
+	EndGlobalSection
+EndGlobal

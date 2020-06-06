@@ -1,0 +1,44 @@
+version: '3.4'
+
+networks:
+  docker_app:
+    driver: bridge 
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.16.238.0/24"
+        - subnet: "2001:3984:3989::/64"
+
+services:
+  db:
+    image: "mcr.microsoft.com/mssql/server:2019-CU4-ubuntu-16.04"
+    environment:
+        SA_PASSWORD: "YourStrong@Passw0rd"
+        ACCEPT_EULA: "Y"
+    container_name: "sql_db"
+    networks:
+      docker_app:
+            ipv4_address: 172.16.238.10
+            ipv6_address: 2001:3984:3989::10
+    ports:
+        - "5010:1433"
+     
+  aspnetcorecrud:
+    image: ${DOCKER_REGISTRY-}aspnetcorecrud
+    build:
+      context: .
+      dockerfile: ASPNETCoreCRUD/Dockerfile
+    container_name: "aspnet_app"
+    depends_on:
+      - "db"
+    environment:
+      DB_CONNECTION: "Server=172.16.238.10,1433; initial catalog=mydb;persist security info=True;user id=sa;password=YourStrong@Passw0rd"
+      WAIT_HOSTS: mssql:1433
+      WAIT_HOSTS_TIMEOUT: 300
+    networks:
+      docker_app:
+            ipv4_address: 172.16.238.11
+            ipv6_address: 2001:3984:3989::11
+    ports:
+        - "5011:80"
+        - "5012:443"
